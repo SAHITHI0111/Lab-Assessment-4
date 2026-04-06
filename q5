@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>React Todo List</title>
+
+<script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+<style>
+.container{
+  width:300px;
+  margin:auto;
+  text-align:center;
+  border:2px solid black;
+  padding:20px;
+}
+
+input{
+  padding:5px;
+  margin:10px;
+}
+
+button{
+  padding:6px 10px;
+}
+
+ul{
+  text-align:left;
+}
+</style>
+
+</head>
+
+<body>
+
+<div id="root"></div>
+
+<script type="text/babel">
+
+function TodoApp(){
+
+const [task,setTask] = React.useState("");
+const [tasks,setTasks] = React.useState([]);
+
+const addTask = () => {
+  if(task !== ""){
+    setTasks([...tasks,task]);
+    setTask("");
+  }
+}
+
+return(
+<div className="container">
+
+<h2>Todo List</h2>
+
+<input
+type="text"
+value={task}
+onChange={(e)=>setTask(e.target.value)}
+placeholder="Enter task"
+/>
+
+<button onClick={addTask}>Add</button>
+
+<ul>
+{
+tasks.map((t,index)=>(
+<li key={index}>{t}</li>
+))
+}
+</ul>
+
+</div>
+);
+}
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<TodoApp/>);
+
+</script>
+</body>
+</html>
