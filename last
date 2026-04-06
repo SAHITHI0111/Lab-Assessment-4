@@ -1,0 +1,46 @@
+import React, { useState } from "react";
+
+function App() {
+
+  const [city, setCity] = useState("");
+  const [data, setData] = useState(null);
+
+  const getWeather = () => {
+
+    // Dummy data (no API)
+    setData({
+      name: city,
+      temp: 32,
+      condition: "Sunny",
+      humidity: 70,
+      wind: 3
+    });
+
+  };
+
+  return (
+    <div style={{ textAlign: "center" }}>
+      <h1>Weather App</h1>
+
+      <input
+        placeholder="Enter city"
+        onChange={(e) => setCity(e.target.value)}
+      />
+
+      <button onClick={getWeather}>Search</button>
+
+      {data && (
+        <div>
+          <h2>{data.name}</h2>
+          <p>Temperature: {data.temp}°C</p>
+          <p>Condition: {data.condition}</p>
+          <p>Humidity: {data.humidity}%</p>
+          <p>Wind: {data.wind} m/s</p>
+        </div>
+      )}
+    </div>
+  );
+
+}
+
+export default App;
