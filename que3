@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>React Image Gallery</title>
+
+<script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+<style>
+body{
+  font-family: Arial;
+  text-align:center;
+}
+
+.gallery{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  margin-top:20px;
+}
+
+.gallery img{
+  width:80px;
+  height:80px;
+  cursor:pointer;
+  transition:transform 0.3s;
+}
+
+.gallery img:hover{
+  transform:scale(1.1);
+}
+
+.preview img{
+  width:300px;
+  height:200px;
+  margin-top:20px;
+  border:2px solid black;
+}
+</style>
+
+</head>
+
+<body>
+
+<div id="root"></div>
+
+<script type="text/babel">
+
+function ImageGallery(){
+
+const images = [
+"https://picsum.photos/id/1015/300/200",
+"https://picsum.photos/id/1016/300/200",
+"https://picsum.photos/id/1018/300/200",
+"https://picsum.photos/id/1020/300/200"
+];
+
+const [selected,setSelected] = React.useState(images[0]);
+
+return(
+<div>
+
+<h2>Image Gallery</h2>
+
+<div className="preview">
+<img src={selected}/>
+</div>
+
+<div className="gallery">
+{
+images.map((img,index)=>(
+<img
+key={index}
+src={img}
+onClick={()=>setSelected(img)}
+/>
+))
+}
+</div>
+
+</div>
+);
+}
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<ImageGallery/>);
+
+</script>
+
+</body>
+</html>
